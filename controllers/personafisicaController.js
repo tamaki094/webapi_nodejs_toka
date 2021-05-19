@@ -45,8 +45,23 @@ const addPersonaFisica = async(req, res, next) => {
     }
 }
 
+const updatePersonaFisica = async(req, res, next) => {
+    try
+    {
+        const id = req.params.id;
+        const data = req.body;
+        const updated = await personafisicaData.updatePersonaFisica(id, data); 
+        res.send(updated);
+    }
+    catch(error)
+    {
+        res.status(400).send(error.message);
+    }
+}
+
 module.exports ={
     getPersonasFisicas,
     getPersonaFisicaById,
-    addPersonaFisica
+    addPersonaFisica,
+    updatePersonaFisica
 }
