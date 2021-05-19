@@ -1,0 +1,7 @@
+   1 np init -y
+   2 npm init -y
+   3 npm install express mssqk cors body-parser
+   4 npm install express mssql cors body-parser
+   5 npm install fs-extra
+   6 npm install nodemon --save-dev
+   7 npm install dotenv
