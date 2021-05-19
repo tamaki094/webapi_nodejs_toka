@@ -1,0 +1,1 @@
+EXEC dbo.sp_AgregarPersonaFisica @Nombre, @ApellidoPaterno, @ApellidoMaterno, @RFC, @FechaNacimiento, @UsuarioAgrega;
