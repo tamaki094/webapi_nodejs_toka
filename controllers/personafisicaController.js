@@ -59,9 +59,23 @@ const updatePersonaFisica = async(req, res, next) => {
     }
 }
 
+const deletePersonaFisica = async(req, res, next) => {
+    try
+    {
+        const id = req.params.id;
+        const deleted = await personafisicaData.deletePersonaFisica(id); 
+        res.send(deleted);
+    }
+    catch(error)
+    {
+        res.status(400).send(error.message);
+    }
+}
+
 module.exports ={
     getPersonasFisicas,
     getPersonaFisicaById,
     addPersonaFisica,
-    updatePersonaFisica
+    updatePersonaFisica,
+    deletePersonaFisica
 }

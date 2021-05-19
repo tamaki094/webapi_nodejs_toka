@@ -149,26 +149,16 @@ const updatePersonaFisica = async(idPersonaFisica, personaFisicaData) => {
     
 }
 
-const deletePersonaFisica = async(idPersonaFisica, personaFisicaData) => {
+const deletePersonaFisica = async(idPersonaFisica) => {
     try
     {
-        console.log("-----prueba---------");
-        console.log(idPersonaFisica);
-        console.log(personaFisicaData);
-        console.log("--------------");
     ////METODO: EJECUTUAR SP CON EXECUTE
         let error;
         let pool = await sql.connect(config.sql);
         const sqlQueries = await utils.loadSqlQueries('personas_fisicas');
         const actualizarPersonaFisica = await pool.request()
-                                .input('IdPersonaFisica', sql.Int, idPersonaFisica)
-                                .input('Nombre', sql.NVarChar(50), personaFisicaData.Nombre)
-                                .input('ApellidoPaterno', sql.NVarChar(50), personaFisicaData.ApellidoPaterno)
-                                .input('ApellidoMaterno', sql.NVarChar(50), personaFisicaData.ApellidoMaterno)
-                                .input('RFC', sql.NVarChar(13), personaFisicaData.RFC)
-                                .input('FechaNacimiento', sql.Date, personaFisicaData.FechaNacimiento)
-                                .input('UsuarioAgrega', sql.Int, personaFisicaData.UsuarioAgrega)                           
-                                .execute('dbo.sp_ActualizarPersonaFisica').then(function(err, recordsets, returnValue, affected) {
+                                .input('IdPersonaFisica', sql.Int, idPersonaFisica)                         
+                                .execute('dbo.sp_EliminarPersonaFisica').then(function(err, recordsets, returnValue, affected) {
                                     console.dir(err);
                                     console.log(err.recordset[0].ERROR);
                                     console.log(err.recordset[0].MENSAJEERROR);
@@ -191,5 +181,6 @@ module.exports = {
     getPersonasFisicas,
     getPersonaFisicaById,
     createPersonaFisica,
-    updatePersonaFisica
+    updatePersonaFisica,
+    deletePersonaFisica
 }
