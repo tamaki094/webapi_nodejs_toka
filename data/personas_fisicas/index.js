@@ -39,7 +39,8 @@ const getPersonaFisicaById = async(idPersonaFisica) => {
 const createPersonaFisica = async(personaFisicaData) => {
     try
     {
-
+        console.log("*-------------------------createPersonaFisica()----------------*")
+        console.log(personaFisicaData);
     ////METODO: INSERT QUERY
     //     let pool = await sql.connect(config.sql);
     //     const sqlQueries = await utils.loadSqlQueries('personas_fisicas');
@@ -94,12 +95,12 @@ const createPersonaFisica = async(personaFisicaData) => {
         let pool = await sql.connect(config.sql);
         const sqlQueries = await utils.loadSqlQueries('personas_fisicas');
         const insertPersonaFisica = await pool.request()
-                                .input('Nombre', sql.NVarChar(50), personaFisicaData.Nombre)
-                                .input('ApellidoPaterno', sql.NVarChar(50), personaFisicaData.ApellidoPaterno)
-                                .input('ApellidoMaterno', sql.NVarChar(50), personaFisicaData.ApellidoMaterno)
-                                .input('RFC', sql.NVarChar(13), personaFisicaData.RFC)
-                                .input('FechaNacimiento', sql.Date, personaFisicaData.FechaNacimiento)
-                                .input('UsuarioAgrega', sql.Int, personaFisicaData.UsuarioAgrega)
+                                .input('Nombre', sql.NVarChar(50), personaFisicaData.nombre)
+                                .input('ApellidoPaterno', sql.NVarChar(50), personaFisicaData.apellidoPaterno)
+                                .input('ApellidoMaterno', sql.NVarChar(50), personaFisicaData.apellidoMaterno)
+                                .input('RFC', sql.NVarChar(13), personaFisicaData.rfc)
+                                .input('FechaNacimiento', sql.Date, personaFisicaData.fechaNacimiento)
+                                .input('UsuarioAgrega', sql.Int, personaFisicaData.usuarioAgrega)
                                 .execute('dbo.sp_AgregarPersonaFisica').then(function(err, recordsets, returnValue, affected) {
                                     console.log(err.recordset[0].ERROR);
                                     console.log(err.recordset[0].MENSAJEERROR);
@@ -118,18 +119,21 @@ const createPersonaFisica = async(personaFisicaData) => {
 const updatePersonaFisica = async(idPersonaFisica, personaFisicaData) => {
     try
     {
+        console.log("*-------------------------updatePersonaFisica()----------------*")
+        console.log(idPersonaFisica);
+        console.log(personaFisicaData);
     ////METODO: EJECUTUAR SP CON EXECUTE
         let error;
         let pool = await sql.connect(config.sql);
         const sqlQueries = await utils.loadSqlQueries('personas_fisicas');
         const actualizarPersonaFisica = await pool.request()
                                 .input('IdPersonaFisica', sql.Int, idPersonaFisica)
-                                .input('Nombre', sql.NVarChar(50), personaFisicaData.Nombre)
-                                .input('ApellidoPaterno', sql.NVarChar(50), personaFisicaData.ApellidoPaterno)
-                                .input('ApellidoMaterno', sql.NVarChar(50), personaFisicaData.ApellidoMaterno)
-                                .input('RFC', sql.NVarChar(13), personaFisicaData.RFC)
-                                .input('FechaNacimiento', sql.Date, personaFisicaData.FechaNacimiento)
-                                .input('UsuarioAgrega', sql.Int, personaFisicaData.UsuarioAgrega)                           
+                                .input('Nombre', sql.NVarChar(50), personaFisicaData.nombre)
+                                .input('ApellidoPaterno', sql.NVarChar(50), personaFisicaData.apellidoPaterno)
+                                .input('ApellidoMaterno', sql.NVarChar(50), personaFisicaData.apellidoMaterno)
+                                .input('RFC', sql.NVarChar(13), personaFisicaData.rfc)
+                                .input('FechaNacimiento', sql.Date, personaFisicaData.fechaNacimiento)
+                                .input('UsuarioAgrega', sql.Int, personaFisicaData.usuarioAgrega)                          
                                 .execute('dbo.sp_ActualizarPersonaFisica').then(function(err, recordsets, returnValue, affected) {
                                     console.dir(err);
                                     console.log(err.recordset[0].ERROR);

@@ -1,7 +1,7 @@
 SELECT 
 	[IdPersonaFisica]
 	, [FechaRegistro]
-	, [FechaActualizacion]
+	 , ISNULL(FechaActualizacion, FechaRegistro) AS [FechaActualizacion]
 	, [Nombre]
 	, [ApellidoPaterno]
 	, [ApellidoMaterno]
